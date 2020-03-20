@@ -1,4 +1,5 @@
 import bpy
+from bpy.app.handlers import persistent
 
 bl_info = {
     "name" : "Save Point Addon",
@@ -20,13 +21,18 @@ class bpy_OT_savepoint(bpy.types.Operator):
         print("Save Point")
         bpy.ops.ed.undo_push(message="Save Point")
         return {'FINISHED'}  
+	
+@persistent
+def load_handler(dummy):
+	bpy.app.handlers.save_post.append(bpy_OT_savepoint.execute)
 
 def register():
 	bpy.utils.register_class(bpy_OT_savepoint)
-	bpy.app.handlers.save_post.append(bpy_OT_savepoint.execute)
+	bpy.app.handlers.load_post.append(load_handler)
 
 def unregister():
 	bpy.utils.unregister_class(bpy_OT_savepoint)
+	bpy.app.handlers.load_post.remove(load_handler)
 
 if __name__ == "__main__":
     register()

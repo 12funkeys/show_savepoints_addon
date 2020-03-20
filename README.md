@@ -2,6 +2,7 @@
 Show savepoints in undo history.  
 Undo履歴に保存履歴を残します。
 
+![アドオンイメージ](https://github.com/12funkeys/show_savepoints_addon/blob/master/savepoint_thumb.png)
 
 ## Requirements（使用条件）
 * Blender 2.81+
